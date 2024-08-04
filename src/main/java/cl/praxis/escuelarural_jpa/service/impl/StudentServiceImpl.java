@@ -5,6 +5,7 @@ import cl.praxis.escuelarural_jpa.repository.IStudentRepository;
 import cl.praxis.escuelarural_jpa.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,16 +29,19 @@ public class StudentServiceImpl implements IStudentService {
         return studentRepository.findAll();
     }
 
+    @Transactional
     @Override
     public Student addStudent(Student student) {
         return studentRepository.save(student);
     }
 
+    @Transactional
     @Override
     public Student updateStudent(Student student) {
         return studentRepository.save(student);
     }
 
+    @Transactional
     @Override
     public void deleteStudent(Long id) {
         studentRepository.deleteById(id);

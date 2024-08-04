@@ -5,6 +5,7 @@ import cl.praxis.escuelarural_jpa.repository.ICourseRepository;
 import cl.praxis.escuelarural_jpa.service.ICourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,16 +29,19 @@ public class CourseServiceImpl implements ICourseService {
         return courseRepository.findAll();
     }
 
+    @Transactional
     @Override
     public Course addCourse(Course course) {
         return courseRepository.save(course);
     }
 
+    @Transactional
     @Override
     public Course updateCourse(Course course) {
         return courseRepository.save(course);
     }
 
+    @Transactional
     @Override
     public void deleteCourse(Long id) {
         courseRepository.deleteById(id);
