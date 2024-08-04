@@ -73,4 +73,18 @@ public class CourseController {
         courseService.deleteCourse(id);
         return "redirect:/courses";
     }
+
+    @PostMapping("{id}/addStudent")
+    public String addStudent(@PathVariable Long id,
+                             @RequestParam("studentId") Long studentId){
+        courseService.addStudent(id,studentId);
+        return "redirect:/courses/" + id;
+    }
+
+    @DeleteMapping("{id}/removeStudent")
+    public String removeStudent(@PathVariable Long id,
+                                @RequestParam Long studentId){
+        courseService.removeStudent(id,studentId);
+        return "redirect:/courses/" + id;
+    }
 }

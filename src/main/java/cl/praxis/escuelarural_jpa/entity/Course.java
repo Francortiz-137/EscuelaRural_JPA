@@ -26,4 +26,14 @@ public class Course {
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
     private List<Student> students;
+
+    public void addStudent(Student student) {
+        students.add(student);
+        student.setCourse(this);
+    }
+
+    public void removeStudent(Student student) {
+        students.remove(student);
+        student.setCourse(null);
+    }
 }

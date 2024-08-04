@@ -26,7 +26,7 @@
             <td th:text="${course.credits}"></td>
             <td>
                 <ul th:each="student : ${course.students}">
-                    <li th:text="${student.firstName} ${student.lastName}"></li>
+                    <li th:text="${student.firstName}"></li>
                 </ul>
             </td>
             <td>

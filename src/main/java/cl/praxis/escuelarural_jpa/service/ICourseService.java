@@ -13,4 +13,7 @@ public interface ICourseService {
     Course updateCourse(Course course);
     void deleteCourse(Long id);
 
+    void addStudent(Long id, Long studentId);
+
+    void removeStudent(Long id, Long studentId);
 }
