@@ -13,14 +13,22 @@
             <th>Title</th>
             <th>Description</th>
             <th>Credits</th>
+            <th>Students</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="course : ${courses}">
-            <td th:text="${course.title}"></td>
+            <td>
+                <a th:href="@{/courses/{id}(id=${course.id})}" th:text="${course.title}"></a>
+            </td>
             <td th:text="${course.description}"></td>
             <td th:text="${course.credits}"></td>
+            <td>
+                <ul th:each="student : ${course.students}">
+                    <li th:text="${student.firstName} ${student.lastName}"></li>
+                </ul>
+            </td>
             <td>
                 <a class="btn btn-primary" th:href="@{/courses/edit/{id}(id=${course.id})}">Edit</a>
                 <form th:action="@{/courses/delete/{id}(id=${course.id})}" method="post" style="display:inline;">

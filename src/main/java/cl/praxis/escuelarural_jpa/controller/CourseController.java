@@ -1,10 +1,13 @@
 package cl.praxis.escuelarural_jpa.controller;
 
 import cl.praxis.escuelarural_jpa.entity.Course;
+import cl.praxis.escuelarural_jpa.entity.Student;
 import cl.praxis.escuelarural_jpa.service.ICourseService;
+import cl.praxis.escuelarural_jpa.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,10 +17,12 @@ import java.util.List;
 public class CourseController {
 
     private ICourseService courseService;
+    private IStudentService studentService;
 
     @Autowired
-    public CourseController(ICourseService courseService) {
+    public CourseController(ICourseService courseService, IStudentService studentService) {
         this.courseService = courseService;
+        this.studentService = studentService;
     }
 
     @GetMapping("")
@@ -28,9 +33,11 @@ public class CourseController {
     }
 
     @GetMapping("/{id}")
-    public String getCourse(Model model, @PathVariable Long id) {
+    public String getCourse(ModelMap modelMap, @PathVariable Long id) {
         Course course = courseService.getCourse(id);
-        model.addAttribute("course", course);
+        List<Student> students = studentService.getAllStudents();
+        modelMap.addAttribute("course", course);
+        modelMap.addAttribute("students", students);
         return "course";
     }
 

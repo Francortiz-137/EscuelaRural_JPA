@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Course Details</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="container mt-5">
+    <h1 class="mb-4">Course Details</h1>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${course.title}"></h5>
+            <p class="card-text"><strong>Description:</strong> <span th:text="${course.description}"></span></p>
+            <p class="card-text"><strong>Credits:</strong> <span th:text="${course.credits}"></span></p>
+        </div>
+    </div>
 
+    <h2 class="mb-3">Enroll a Student</h2>
+    <form th:action="@{/courses/{id}/addStudent(id=${course.id})}" method="post">
+        <div class="form-group">
+            <label for="student">Select Student:</label>
+            <select id="student" name="studentId" class="form-control">
+                <option th:each="student : ${students}" th:value="${student.id}" th:text="${student.firstName}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Student</button>
+    </form>
+
+    <h2 class="mt-5">Enrolled Students</h2>
+    <ul class="list-group">
+        <li class="list-group-item" th:each="student : ${course.students}" th:text="${student.firstName}"></li>
+    </ul>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

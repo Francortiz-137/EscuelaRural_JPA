@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,4 +23,7 @@ public class Course {
     @Column(name = "creditos", nullable = false)
     private float credits;
     private boolean deleted = false;
+
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    private List<Student> students;
 }

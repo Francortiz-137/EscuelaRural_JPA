@@ -24,9 +24,9 @@ public class Student {
     private String lastName;
     @Column(name = "fecha_nacimiento")
     private LocalDate birthDate;
-
     private boolean deleted = false;
 
-    /* TODO relacion muchos a muchos con curso */
-   //
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="course_id")
+    private Course course;
 }
